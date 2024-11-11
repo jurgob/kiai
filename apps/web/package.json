@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "@repo/web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@huggingface/inference": "^2.8.1",
     "@repo/ui": "workspace:*",
     "next": "14.2.8",
     "react": "catalog:react18",
