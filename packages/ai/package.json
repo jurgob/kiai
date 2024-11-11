@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cli": "node --experimental-strip-types ./src/cli.ts"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

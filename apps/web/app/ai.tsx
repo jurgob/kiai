@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { HfInference } from "@huggingface/inference";
 import { Button } from "@repo/ui/components/ui/button";
 
-const TOKEN = ""
+const TOKEN = "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"
 
 export const AiComponent: React.FC = () => {
     const [response, setResponse] = useState<string>("");
