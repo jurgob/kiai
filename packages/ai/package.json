@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "cli": "node --experimental-strip-types ./src/cli.ts"
+    "cli": "node --env-file=../../.env  --experimental-strip-types ./src/cli.ts"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
