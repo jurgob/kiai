@@ -1,14 +1,15 @@
 import { HfInference } from "@huggingface/inference";
+import { url } from "node:inspector";
 
 const TOKEN = process.env.HF_TOKEN;
 
 export async function createHfClient(){
   const hf = new HfInference(TOKEN);
 
-  const questionAnswering = async ({question, context, model}: {question: string, context: string, model: string}) => {
+  const textGeneration = async ({question, model}: {question: string, context: string, model: string}) => {
     const result = await hf.textGeneration({
       model,
-      inputs: `${context}  ${question}`,
+      inputs: question,
       parameters: {
         max_new_tokens: 50,  // Max number of new tokens to generate
         temperature: 0.1,    // Sampling temperature for text diversity
@@ -24,9 +25,42 @@ export async function createHfClient(){
     });
   }
 
+  const summarization = async ({inputs="", model='facebook/bart-large-cnn'}) => {
+    return await hf.summarization({
+      model ,
+      inputs,
+      parameters: {
+        max_length: 100
+      }
+    }) 
+  }
+
+
+  const documentQuestionAnswering = async ({model='impira/layoutlm-document-qa', question, url}: {model?: string, question: string, url: string}) => {
+    return await hf.documentQuestionAnswering({
+      model,
+      inputs: {
+        question,
+        image: await (await fetch(url)).blob()
+      }
+    })
+  }
+
+  const questionAnswering = async ({model='deepset/roberta-base-squad2', question, context}: {model?: string, question: string, context: string}) => {
+    return await hf.questionAnswering({
+      model,
+      inputs: {
+        question, 
+        context
+      }
+    })
+  }
 
   return {
     questionAnswering,
-    textToImage
+    textGeneration,
+    textToImage,
+    summarization,
+    documentQuestionAnswering
   }
 }
