@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "ui": "pnpm dlx shadcn@latest",
-    "lint": "eslint ."
+    "ui": "pnpx shadcn",
+    "lint": "eslint .",
+    "ui:add": "pnpx shadcn@latest add"
   },
   "peerDependencies": {
     "react": "^18"
