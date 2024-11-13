@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
- 
+import { env} from "~/env";
 export function middleware(request: NextRequest) {
   const {pathname} = new URL(request.url)
-    console.log('--- url.pathname',pathname);
-    
-    if(pathname.startsWith('/hf/')){
+    console.log('--- url.pathname',env.AUTH);
+
+    if(env.AUTH && pathname.startsWith('/hf/')){
       if (pathname.startsWith('/hf/login')) {
         return NextResponse.next()
       }
