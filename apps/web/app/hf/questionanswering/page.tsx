@@ -103,7 +103,7 @@ export default function QuestionAnswering() {
                         <select 
                             id="model" 
                             {...register("model")} 
-                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-black text-white"
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent  text-black"
                         >
                             <option value="deepset/roberta-base-squad2">deepset/roberta-base-squad2</option>
                             <option value="distilbert/distilbert-base-cased-distilled-squad">distilbert/distilbert-base-cased-distilled-squad</option>
