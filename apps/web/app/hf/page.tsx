@@ -1,27 +1,7 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-  } from "@repo/ui/components/ui/card"
-import Link from "next/link";
-  
-import Title from "@repo/ui/components/ui/title";
-const NavCard = ({ title, description, href }: { title: string; description: string; href: string }) => {
-    return (
-        <Card className="hover:bg-gray-200 hover:border hover:border-gray-800">
-            <Link href={href} >
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <CardDescription>{description}</CardDescription>
-            </CardContent>
-            </Link>
-        </Card>
-    )
-};
+
+  import Title from "@repo/ui/components/ui/title";
+  import {NavCard} from "~/app/components/navcard";
+
 
 
 export default function PlaytroundPage() {

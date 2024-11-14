@@ -1,20 +1,17 @@
-"use client";
+import Title from "@repo/ui/components/ui/title";
+import {NavCard} from "~/app/components/navcard";
 
-import { Button } from "@repo/ui/components/ui/button";
-import { Input } from "@repo/ui/components/ui/input";
-import {AiComponent} from "./ai";
-export default function Page() {
+export default function MainPage() {
   return (
-    <main>
-      <div className="flex flex-col items-center justify-between p-4 max-w-md mx-auto">
-        <div className="flex flew-row gap-3" >
-        <Input className="mb-2 w-full" placeholder="Type here" />
-        <Button className="mb-2">Click me</Button>
-        </div>
-        <div>
-          <AiComponent />
-        </div>
+      <div className='p-4 flex flex-col gap-4 items-center'>
+          <Title size="large" >KI-AI</Title> 
+          <section className='text-center'>
+          <p>Kiai is an ai playground</p>
+          </section>
+          <section className='flex flex-row gap-2 justify-center'>
+         <NavCard title='Hugging Face' description='Test different Hugging Face products' href='/hf' />
+         <NavCard title='Open AI' description='Open Ai Products' href='/oai' />
+          </section>
       </div>
-    </main>
-  );
+  )
 }
