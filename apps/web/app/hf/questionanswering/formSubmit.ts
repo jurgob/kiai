@@ -1,17 +1,19 @@
 "use server";
 import { schema } from "./formSchema";
-
+import { createHfClient } from "@repo/ai";
 export type FormState = {
   message: string;
   fields?: Record<string, string>;
   issues?: string[];
+  result?: { answer: string }; 
 };
+
 
 export async function onSubmitAction(
   prevState: FormState,
   data: FormData
-): Promise<FormState> {
-    console.log("onSubmitAction");
+){
+  const { questionAnswering} =  await createHfClient();
   const formData = Object.fromEntries(data);
   const parsed = schema.safeParse(formData);
 
@@ -27,5 +29,8 @@ export async function onSubmitAction(
     };
   }
 
-  return { message: "success" };
+    const { model, question, document } = parsed.data;
+    const result = await questionAnswering({ model, question, context: document });
+    const answer = result.answer
+    return { message: "success" , result: { answer } };
 }

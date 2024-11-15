@@ -8,8 +8,8 @@ import { schema } from "./formSchema";
 
 import Title from "@repo/ui/components/ui/title";
 import { z } from "zod";
-import { useFormState } from "react-dom";
-
+// import { useActionState } from "react"
+import { useFormState } from "react-dom"
 import { onSubmitAction } from "./formSubmit";
 import { useForm ,} from "react-hook-form";
 import { useRef } from "react";
@@ -28,7 +28,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, HTMLProps<HTMLTextAreaElement> 
                     name={name}
                     ref={ref}
                     {...taProps}
-                    className={`w-full p-2 border rounded-md shadow-sm focus:outline-none  ${error ? 'border-red-600 focus:border-red-600' : 'border-gray-300 focus:border-transparent'}`}
+                    className={`w-full p-2 border rounded-md shadow-sm focus:outline-none  ${error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-gray-500'}`}
                 />
                 {error && <p className="text-red-600">{error}</p>}
             </div>
@@ -51,7 +51,7 @@ export default function QuestionAnswering() {
     const {
         handleSubmit,
         register,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting},
 
     } = useForm<FormSchema>({
         resolver: zodResolver(schema),
@@ -64,6 +64,7 @@ export default function QuestionAnswering() {
 
     const [state, formAction] = useFormState(onSubmitAction, {
         message: "",
+        result: { answer: "" },
       });
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -93,7 +94,6 @@ export default function QuestionAnswering() {
                         evt.preventDefault();
                         console.log("onSubmit");
                         handleSubmit(() => {
-                            console.log("handleSubmit");
                             formAction(new FormData(formRef.current!));
                         })(evt);
                     }}
@@ -120,6 +120,13 @@ export default function QuestionAnswering() {
                         Submit
                     </button>
                 </form>
+                <div>
+                    <h2>Answer</h2>
+                    {(state.result?.answer || isSubmitting ) && <div>
+                        {isSubmitting && <p>Loading ...</p>}
+                        {state.result?.answer && <p>{state.result.answer}</p>}
+                    </div>}
+                </div>
         </div>
     );
 }

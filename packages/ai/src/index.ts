@@ -1,8 +1,7 @@
-import { HfInference } from "@huggingface/inference";
-import { url } from "node:inspector";
-
+import { HfInference,  } from "@huggingface/inference";
 const TOKEN = process.env.HF_TOKEN;
-
+export type QuestionAnsweringResponse = typeof HfInference
+// type QuestionAnsweringResponse =  Awaited<ReturnType<typeof hf.questionAnswering>>
 export async function createHfClient(){
   const hf = new HfInference(TOKEN);
 
@@ -45,6 +44,7 @@ export async function createHfClient(){
       }
     })
   }
+
 
   const questionAnswering = async ({model='deepset/roberta-base-squad2', question, context}: {model?: string, question: string, context: string}) => {
     return await hf.questionAnswering({
